@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Meus tópicos</h1>
+
+    <div>
+        {% for topic in topics %}
+            <div>
+                <h4>
+                    <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic.title }}</a>
+                </h4>
+            </div>
+        {% empty %}
+            <div>
+                <p>Não há tópicos registrados</p>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

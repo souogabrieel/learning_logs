@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{ topic.title }}</h1>
+
+    <div>
+        {% for entry in entries %}
+            <div>
+                <h4>{{ entry.date_created }}</h4>
+                <p>{{ entry.content }}</p>
+                <hr>
+            </div>
+        {% empty %}
+            <div>
+                <p>Não há registros para esse tópico</p>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
