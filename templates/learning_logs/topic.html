@@ -2,7 +2,14 @@
 
 {% block content %}
 
-    <h1>{{ topic.title }}</h1>
+    <div>
+        <h1>{{ topic.title }}</h1>
+        <a href="{% url 'learning_logs:update_topic' topic.id %}">Atualizar tópico</a>
+        <form action="{% url 'learning_logs:delete_topic' topic.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Excluir tópico">
+        </form>
+    </div>
 
     <div>
         {% for entry in entries %}

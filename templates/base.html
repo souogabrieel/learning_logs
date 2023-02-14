@@ -16,6 +16,10 @@
     {% include 'navbar.html' %}
 
     <main>
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+
         {% block content %}{% endblock %}
     </main>
 </body>

@@ -2,7 +2,10 @@
 
 {% block content %}
 
-    <h1>Meus tópicos</h1>
+    <div>
+        <h1>Meus tópicos</h1>
+        <a href="{% url 'learning_logs:create_topic' %}">Novo tópico</a>
+    </div>
 
     <div>
         {% for topic in topics %}
