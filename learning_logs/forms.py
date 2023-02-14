@@ -27,3 +27,10 @@ class TopicForm(forms.ModelForm):
             raise ValidationError("Você já possui um tópico com esse título!")
 
         return title
+
+
+class EntryForm(forms.ModelForm):
+    class Meta:
+        model = models.Entry
+        fields = ["content"]
+        labels = {"content": "O que você aprendeu?"}
