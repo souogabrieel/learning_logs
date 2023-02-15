@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import Http404
 
-from . import models, forms
+from . import models, forms, helpers
 
 
 def index(request):
@@ -12,21 +12,24 @@ def index(request):
 
 def public_topics(request):
     topics = models.Topic.objects.filter(public=True)
-    context = {"topics": topics, "public": True}
+    paginated_topics = helpers.paginate(request, topics)
+    context = {"topics": paginated_topics, "public": True}
     return render(request, "learning_logs/topics.html", context)
 
 
 def public_topic(request, topic_id):
     topic = get_object_or_404(models.Topic, id=topic_id, public=True)
     entries = topic.entries.all()
-    context = {"topic": topic, "entries": entries, "public": True}
+    paginated_entries = helpers.paginate(request, entries)
+    context = {"topic": topic, "entries": paginated_entries, "public": True}
     return render(request, "learning_logs/topic.html", context)
 
 
 @login_required
 def topics(request):
     topics = models.Topic.objects.filter(owner=request.user)
-    context = {"topics": topics}
+    paginated_topics = helpers.paginate(request, topics)
+    context = {"topics": paginated_topics}
     return render(request, "learning_logs/topics.html", context)
 
 
@@ -34,7 +37,8 @@ def topics(request):
 def topic(request, topic_id):
     topic = get_object_or_404(models.Topic, id=topic_id, owner=request.user)
     entries = topic.entries.all()
-    context = {"topic": topic, "entries": entries}
+    paginated_entries = helpers.paginate(request, entries)
+    context = {"topic": topic, "entries": paginated_entries}
     return render(request, "learning_logs/topic.html", context)
 
 
