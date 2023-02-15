@@ -3,15 +3,19 @@
 {% block content %}
 
     <div>
-        <h1>Meus tópicos</h1>
-        <a href="{% url 'learning_logs:create_topic' %}">Novo tópico</a>
+        {% if not public %}
+            <h1>Meus tópicos</h1>
+            <a href="{% url 'learning_logs:create_topic' %}">Novo tópico</a>
+        {% else %}
+            <h1>Tópicos públicos</h1>
+        {% endif %}
     </div>
 
     <div>
         {% for topic in topics %}
             <div>
                 <h4>
-                    <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic.title }}</a>
+                    <a href="{% if public %}{% url 'learning_logs:public_topic' topic.id %}{% else %}{% url 'learning_logs:topic' topic.id %}{% endif %}">{{ topic.title }}</a>
                 </h4>
             </div>
         {% empty %}

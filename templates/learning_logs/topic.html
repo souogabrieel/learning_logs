@@ -4,12 +4,17 @@
 
     <div>
         <h1>{{ topic.title }}</h1>
-        <a href="{% url 'learning_logs:update_topic' topic.id %}">Atualizar tópico</a>
-        <form action="{% url 'learning_logs:delete_topic' topic.id %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Excluir tópico">
-        </form>
-        <a href="{% url 'learning_logs:create_entry' topic.id %}">Novo registro</a>
+
+        {% if public %}
+            <p>Tópico criado por: {{ topic.owner }}</p>
+        {% else %}
+            <a href="{% url 'learning_logs:update_topic' topic.id %}">Atualizar tópico</a>
+            <form action="{% url 'learning_logs:delete_topic' topic.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Excluir tópico">
+            </form>
+            <a href="{% url 'learning_logs:create_entry' topic.id %}">Novo registro</a>
+        {% endif %}
     </div>
 
     <div>
@@ -17,11 +22,15 @@
             <div>
                 <h4>{{ entry.date_created }}</h4>
                 <p>{{ entry.content }}</p>
-                <a href="{% url 'learning_logs:update_entry' entry.id %}">Atualizar registro</a>
-                <form action="{% url 'learning_logs:delete_entry' entry.id %}" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Excluir registro">
-                </form>
+                {% if not public %}
+                    <div>
+                        <a href="{% url 'learning_logs:update_entry' entry.id %}">Atualizar registro</a>
+                        <form action="{% url 'learning_logs:delete_entry' entry.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Excluir registro">
+                        </form>
+                    </div>
+                {% endif %}
                 <hr>
             </div>
         {% empty %}
