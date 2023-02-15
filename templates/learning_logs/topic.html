@@ -7,6 +7,10 @@
 
         {% if public %}
             <p>Tópico criado por: {{ topic.owner }}</p>
+            <form action="{% url 'learning_logs:copy_topic' topic.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Copiar tópico">
+            </form>
         {% else %}
             <a href="{% url 'learning_logs:update_topic' topic.id %}">Atualizar tópico</a>
             <form action="{% url 'learning_logs:delete_topic' topic.id %}" method="post">
