@@ -4,3 +4,8 @@
     font-family: 'Patrick Hand', cursive;
     letter-spacing: 1.5px;
 }
+
+.main-container {
+    margin: 0 auto;
+    max-width: 900px;
+}

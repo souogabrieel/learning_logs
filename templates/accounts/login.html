@@ -2,12 +2,6 @@
 
 {% block content %}
 
-    <h1>Entre na sua conta</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Entrar">
-    </form>
+    {% include 'form.html' with title='Entre na sua conta' form=form btn_label='Entrar' %}
 
 {% endblock %}

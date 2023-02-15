@@ -2,12 +2,6 @@
 
 {% block content %}
 
-    <h1>Atualizar registro</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Atualizar">
-    </form>
+    {% include 'form.html' with title='Atualizar registro' form=form btn_label='Salvar' %}
 
 {% endblock %}

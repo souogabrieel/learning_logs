@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     # My apps
     "learning_logs.apps.LearningLogsConfig",
     "accounts.apps.AccountsConfig",
+    # Third party
+    "bootstrap5",
+    "django_bootstrap_icons",
 ]
 
 MIDDLEWARE = [

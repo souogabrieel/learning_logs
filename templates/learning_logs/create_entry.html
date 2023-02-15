@@ -2,12 +2,6 @@
 
 {% block content %}
 
-    <h1>Criar um novo registro</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Criar">
-    </form>
+    {% include 'form.html' with title='Criar um novo registro' form=form btn_label='Criar' %}
 
 {% endblock %}

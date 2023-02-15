@@ -1,0 +1,15 @@
+{% load bootstrap5 %}
+
+<h1 class="text-primary mb-4">{{ title }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    {% bootstrap_form_errors form type='non_fields' %}
+
+    {% for field in form %}
+        {% bootstrap_field field show_help=False placeholder='' bound_css_class='' %}
+    {% endfor %}
+
+    <input class="btn btn-primary" type="submit" value="{{ btn_label }}">
+</form>

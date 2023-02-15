@@ -1,15 +1,25 @@
-<div>
-    <span>
+<nav>
+    <ul class="pagination justify-content-center">
         {% if page_obj.has_previous %}
-            <a href="?pagina={{ page_obj.previous_page_number }}">Anterior</a>
+            <li class="page-item">
+                <a class="page-link" href="?pagina={{ page_obj.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
         {% endif %}
 
-        <span>
-             Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
-        </span>
-
+        <li class="page-item active">
+            <span class="page-link">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            </span>
+        </li>
+        
         {% if page_obj.has_next %}
-            <a href="?pagina={{ page_obj.next_page_number }}">Próxima</a>
+            <li class="page-item">
+                <a class="page-link" href="?pagina={{ page_obj.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
         {% endif %}
-    </span>
-</div>
+    </ul>
+</nav>

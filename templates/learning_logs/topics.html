@@ -1,33 +1,35 @@
 {% extends 'base.html' %}
+{% load bootstrap_icons %}
 
 {% block content %}
 
-    <div>
-        {% if not public %}
-            <h1>Meus tópicos</h1>
-            <a href="{% url 'learning_logs:create_topic' %}">Novo tópico</a>
-        {% else %}
-            <h1>Tópicos públicos</h1>
-        {% endif %}
-    </div>
-
-    <div>
+    <div class="position-relative">
+        {% bs_icon 'search' size='1rem' extra_classes='text-secondary position-absolute top-50 translate-middle ms-4' %}
         <form method="get">
-            <input name="q" type="text" value="{{ search_term }}" placeholder="Buscar tópico">
+            <input  class="form-control rounded-pill fs-5 ps-5" name="q" type="text" value="{{ search_term }}" placeholder="Buscar tópico">
         </form>
     </div>
 
-    <div>
+    <div class="list-group mt-5 mb-4">
+        {% if not public %}
+            <div class="d-flex justify-content-end mb-4">
+                <a class="btn btn-primary" href="{% url 'learning_logs:create_topic' %}">Novo tópico</a>
+            </div>
+        {% endif %}
+        
         {% for topic in topics %}
-            <div>
-                <h4>
-                    <a href="{% if public %}{% url 'learning_logs:public_topic' topic.id %}{% else %}{% url 'learning_logs:topic' topic.id %}{% endif %}">{{ topic.title }}</a>
-                </h4>
-            </div>
+            <a class="list-group-item list-group-item-action h5 m-0 py-3 d-flex justify-content-between align-items-start" href="{% if public %}{% url 'learning_logs:public_topic' topic.id %}{% else %}{% url 'learning_logs:topic' topic.id %}{% endif %}">
+                <span>{{ topic.title }}</span>
+                <span class="badge bg-primary rounded-pill">{{ topic.entries.count }}</span>
+            </a>
         {% empty %}
-            <div>
-                <p>Não há tópicos registrados</p>
-            </div>
+            <p class="alert alert-danger h5">
+                {% if search_term %}
+                    Não foram encontrados resultados para: {{ search_term }}
+                {% else %}
+                    Não há tópicos registrados
+                {% endif %}
+            </p>
         {% endfor %}
     </div>
 

@@ -2,12 +2,6 @@
 
 {% block content %}
 
-    <h1>Crie uma conta</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Criar">
-    </form>
+    {% include 'form.html' with title='Crie uma conta' form=form btn_label='Criar' %}
 
 {% endblock %}
