@@ -6,8 +6,20 @@
         <li>
             <a href="{% url 'learning_logs:public_topics' %}">Tópicos Públicos</a>
         </li>
-        <li>
-            <a href="{% url 'learning_logs:topics' %}">Meus Tópicos</a>
-        </li>
+        {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'learning_logs:topics' %}">Meus Tópicos</a>
+            </li>
+            <li>
+                <a href="{% url 'accounts:logout' %}">Sair</a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{% url 'accounts:login' %}">Entrar</a>
+            </li>
+            <li>
+                <a href="{% url 'accounts:signup' %}">Criar conta</a>
+            </li>
+        {% endif %}
     </ul>
 </nav>

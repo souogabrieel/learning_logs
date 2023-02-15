@@ -125,3 +125,7 @@ STATICFILES_DIRS = [BASE_DIR.joinpath("static")]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "learning_logs:topics"
+LOGOUT_REDIRECT_URL = "learning_logs:index"
