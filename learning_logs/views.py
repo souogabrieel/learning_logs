@@ -12,8 +12,9 @@ def index(request):
 
 def public_topics(request):
     topics = models.Topic.objects.filter(public=True)
-    paginated_topics = helpers.paginate(request, topics)
-    context = {"topics": paginated_topics, "public": True}
+    search_term, searched_topics = helpers.search_topics(request, topics)
+    paginated_topics = helpers.paginate(request, searched_topics)
+    context = {"topics": paginated_topics, "search_term": search_term, "public": True}
     return render(request, "learning_logs/topics.html", context)
 
 
@@ -28,8 +29,9 @@ def public_topic(request, topic_id):
 @login_required
 def topics(request):
     topics = models.Topic.objects.filter(owner=request.user)
-    paginated_topics = helpers.paginate(request, topics)
-    context = {"topics": paginated_topics}
+    search_term, searched_topics = helpers.search_topics(request, topics)
+    paginated_topics = helpers.paginate(request, searched_topics)
+    context = {"topics": paginated_topics, "search_term": search_term}
     return render(request, "learning_logs/topics.html", context)
 
 

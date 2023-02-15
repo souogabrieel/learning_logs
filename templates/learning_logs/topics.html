@@ -12,6 +12,12 @@
     </div>
 
     <div>
+        <form method="get">
+            <input name="q" type="text" value="{{ search_term }}" placeholder="Buscar tópico">
+        </form>
+    </div>
+
+    <div>
         {% for topic in topics %}
             <div>
                 <h4>
